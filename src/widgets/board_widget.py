@@ -4,7 +4,6 @@ from PyQt5.QtCore import *
 import copy
 from .square_widget import SquareWidget
 
-
 # controllers
 import os
 import sys

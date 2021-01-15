@@ -60,11 +60,12 @@ class RushHour:
         return True
 
 
-    @staticmethod
-    def is_solved():
+    def is_solved(self):
         """
         return True if and only if the board is solved
         i.e. the XX car is touching the right edge of the board
         """
-        # TODO implement me
-        pass
+        carName = 'X'
+        squares = [(i, j) for i in range(6) for j in range(6) if self.board[i][j] == carName]
+        edge = squares[1]
+        return edge[1] == 5

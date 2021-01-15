@@ -5,6 +5,12 @@ from .level_widget import LevelWidget
 from .board_widget import BoardWidget
 from datetime import datetime
 
+# controllers
+import os
+import sys
+sys.path.append('{}/../'.format(os.path.dirname(os.path.abspath(__file__))))
+from controllers.rush_hour import RushHour
+
 
 DEFAULT_LEVEL_TEXT = (
     "..AA..\n"
@@ -121,3 +127,10 @@ class MainWidget(QWidget):
                 self.boardWidget.carSelected = self.levelWidget.cars[carName]
                 status = f'Moved Car {self.boardWidget.carSelected["name"]} Right'
                 self.parent().setStatus(status)
+
+        controller = RushHour(self.levelWidget.level)
+        if controller.is_solved():
+            msgBox = QMessageBox()
+            msgBox.setWindowTitle("Notification")
+            msgBox.setText("Congrats! You have solved the Rush Hour Puzzle!")
+            msgBox.exec()
