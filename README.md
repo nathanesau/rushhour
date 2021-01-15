@@ -1,2 +1,5 @@
 # rushhour
-Level Editor for Rush Hour (Written using PyQt5)
+
+GUI for rushhour. written using PyQt5.
+
+![](docs/rushhour.gif)
