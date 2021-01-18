@@ -1,6 +1,8 @@
-#pragma once
+#ifndef LEVELWIDGET_H
+#define LEVELWIDGET_H
 
 #include "../common.h"
+#include "../car.h"
 
 const std::vector<std::string> COLORS = {
     "rgba(0, 128, 0, 255)",   // green
@@ -16,9 +18,8 @@ const std::vector<std::string> COLORS = {
 
 class LevelWidget : public QWidget
 {
-private:
     std::vector<std::vector<char>> level;
-    std::vector<std::map<std::string, std::string>> cars;
+    std::map<char, Car> cars;
 
     QPushButton *editBtn;
     QPushButton *applyBtn;
@@ -30,35 +31,26 @@ private:
     QVBoxLayout *mainLayout;
 
 public:
-    LevelWidget(QWidget *parent = nullptr) : QWidget(parent)
+    LevelWidget(QWidget *parent = nullptr);
+
+    std::vector<std::vector<char>> &getLevel()
     {
-        // data
-        level.clear();
-        cars.clear();
+        return level;
+    }
 
-        // widgets
-        editBtn = new QPushButton("Edit");
-        applyBtn = new QPushButton("Apply");
-        originalBoardLabel = new QLabel("Original Board");
-        currentBoardLabel = new QLabel("Current Board");
-        originalBoardTE = new QTextEdit();
-        originalBoardTE->setReadOnly(true);
-        originalBoardTE->setStyleSheet("background: lightgrey");
-        currentBoardTE = new QTextEdit();
-        currentBoardTE->setReadOnly(true);
+    std::map<char, Car> &getCars()
+    {
+        return cars;
+    }
 
-        // layouts
-        menuLayout = new QHBoxLayout();
-        menuWidget->addWidget(editBtn);
-        menuWidget->addWidget(applyBtn);
-        mainLayout = new QVBoxLayout();
-        mainLayout->addWidget(originalBoardLabel);
-        mainLayout->addLayout(menuLayout);
-        mainLayout->addWidget(originalBoardTE);
-        mainLayout->addWidget(currentBoardLabel);
-        mainLayout->addWidget(currentBoardTE);
+    QPushButton *getEditBtn()
+    {
+        return editBtn;
+    }
 
-        setLayout(mainLayout);
+    QPushButton *getApplyBtn()
+    {
+        return applyBtn;
     }
 
     QTextEdit *getOriginalBoardTE()
@@ -71,25 +63,12 @@ public:
         return currentBoardTE;
     }
 
-    void parseLevel(std::vector<std::vector<char>> pLevel)
-    {
-        level = pLevel;
-        std::set<char> pCars;
-        // pCars = set([c for row in self.level for c in row if c != '.'])
-        // self.cars = dict((k, {"squares": [], "name": k, "color": "rgba(255, 0, 0, 255)" if k == 'X' else COLORS[i]}) for i, k in enumerate(cars))
-
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 6; j++)
-            {
-                if (cars.find(pLevel[i][j]) != pChars.end())
-                {
-                    auto car = pLevel[i][j];
-                    // cars[car]["squares"].push_back(i, j);
-                }
-            }
-        }
-    }
+    /**
+     * @brief sets level and cars using provided level.
+     * 
+     * @param pLevel provided level.
+     */
+    void parseLevel(std::vector<std::vector<char>> pLevel);
 
     /**
      * @brief check whether the provided level is valid or not.
@@ -98,40 +77,11 @@ public:
      * 
      * @return true if level valid, false otherwise.
      */
-    bool validateLevel(std::string levelText)
-    {
-        //if len([line for line in levelText.splitlines() if line.strip()]) != 6:
-        //# wrong num rows
-        //return False
-        
-        //if any(len(list(line)) != 6 for line in levelText.splitlines() if line.strip()):
-        //# wrong num cols
-        //return False
+    bool validateLevel(std::string levelText);
 
-        return true;
-    }
+    void setOriginalLevel(std::vector<std::vector<char>> level);
 
-    void setOriginalLevel(const std::vector<std::vector<char>> &level)
-    {
-        // data
-        parseLevel(level);
-
-        // original board
-        //self.originalBoardTE.setPlainText('\n'.join([''.join(square) for square in level]))
-        //cursor = self.originalBoardTE.textCursor()
-        //cursor.movePosition(QTextCursor.End)
-        //self.originalBoardTE.setTextCursor(cursor)
-
-        // current board
-        //self.currentBoardTE.setPlainText('\n'.join([''.join(square) for square in level]))
-    }
-
-    void setCurrentLevel(const std::vector<std::vector<char>> &level)
-    {
-        // data
-        parseLevel(level);
-        
-        // current board
-        //self.currentBoardTE.setPlainText('\n'.join([''.join(square) for square in level]))
-    }
+    void setCurrentLevel(std::vector<std::vector<char>> level);
 };
+
+#endif

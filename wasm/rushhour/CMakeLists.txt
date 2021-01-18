@@ -28,13 +28,22 @@ find_package(Qt5Core REQUIRED)
 
 # Populate a CMake variable with the sources
 set(rushhour_SRCS
-    #src/controllers/rushHour.h
-    #src/widgets/boardWidget.h
-    #src/widgets/levelWidget.h
-    #src/widgets/mainWidget.h
-    #src/widgets/mainWindow.h
-    #src/widgets/squareWidget.h
-    #src/common.h
+    src/controllers/rushHour.h
+    src/utility/string.h
+    src/utility/string.cpp
+    src/widgets/boardWidget.cpp
+    src/widgets/boardWidget.h
+    src/widgets/levelWidget.cpp
+    src/widgets/levelWidget.h
+    src/widgets/mainWidget.cpp
+    src/widgets/mainWidget.h
+    src/widgets/mainWindow.cpp
+    src/widgets/mainWindow.h
+    src/widgets/squareWidget.cpp
+    src/widgets/squareWidget.h
+    src/car.cpp
+    src/car.h
+    src/common.h
     src/main.cpp
 )
 

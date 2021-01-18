@@ -1,32 +1,33 @@
-#pragma once
+#ifndef SQUAREWIDGET_H
+#define SQUAREWIDGET_H
+
 
 #include "../common.h"
+// forward declarations
+class BoardWidget;
 
 class SquareWidget : public QLabel
 {
-private:
     int row;
     int col;
+    BoardWidget *boardWidget;
 
 public:
-    SquareWidget(int row, int col, QWidget *parent = nullptr)
+    SquareWidget(int row, int col, BoardWidget *boardWidget, QWidget *parent = nullptr);
+    
+    int getRow()
     {
+        return row;
     }
 
-    void updateAlpha(int alpha)
+    int getCol()
     {
-        auto style = styleSheet();
-        // background = [e for e in style.split(';') if 'background' in e][0]
-        // rgba = background.split(':')[1].strip()
-        // r, g, b, a = rgba.replace('rgba', '').replace('(', '').replace(')', '').split(', ')
-        // style = style.replace(background, background.replace(rgba, f'rgba({r}, {g}, {b}, {alpha})'))
-        setStyleSheet(sheet);
+        return col;
     }
 
-    void mousePressEvent(QEvent *event)
-    {
-        if (text() != ".") {
-            parent().onSquareClicked(this);
-        }
-    }
-}
+    void updateAlpha(int alpha);
+
+    void mousePressEvent(QMouseEvent *event) override;
+};
+
+#endif

@@ -1,27 +1,22 @@
-#pragma once
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include "../common.h"
+
+// forward declarations
+class MainWidget;
 
 class MainWindow : public QMainWindow
 {
     MainWidget *mainWidget;
 
 public:
-    MainWindow(QWidget *parent = nullptr) :
-        QMainWindow(parent)
-    {
-        mainWidget = new MainWidget;
-        mainWidget-setParent(this);
-
-        setCentralWidget(mainWidget);
-        resize(700, 450);
-        setWindowTitle("Rush Hour");
-        setStatus("Loaded App");
-        setFixedSize(700, 450);
-    }
+    MainWindow(QWidget *parent = nullptr);
 
     void setStatus(std::string status)
     {
-        statusBar().showMessage(status);
+        statusBar()->showMessage(QString::fromStdString(status));
     }
-}
+};
+
+#endif

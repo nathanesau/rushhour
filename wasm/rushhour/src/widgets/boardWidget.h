@@ -1,119 +1,44 @@
-#pragma once
+#ifndef BOARDWIDGET_H
+#define BOARDWIDGET_H
 
 #include "../common.h"
-#include "../controllers/rushHour.h"
+#include "../car.h"
+
+// forward declarations
+class MainWidget;
+class SquareWidget;
 
 class BoardWidget : public QWidget
 {
-private:
-    QLabel *instructionLabel;
     std::vector<std::vector<SquareWidget *>> squares;
     QGridLayout *gridLayout;
     QVBoxLayout *mainLayout;
-    std::map<std::string, std::string> carSelected;
+    Car carSelected;
+    MainWidget *mainWidget;
 
 public:
-    Board(QWidget *parent = nullptr) : QWidget(parent)
-    {
-        // data
-        carSelected.clear();
+    BoardWidget(MainWidget *mainWidget, QWidget *parent = nullptr);
 
-        // widgets
-        instructionLabel = new QLabel("Use arrow keys to move cars");
+    const Car &getCarSelected();
 
-        for (int i = 0; i < 6; i++)
-        {
-            squares.push_back(std::vector<SquareWidget*>(6));
-            for (int j = 0; j < 6; j++)
-            {
-                squares[i][j] = new SquareWidget(i, j);
-            }
-        }
-
-        // layouts
-        gridLayout = new QGridLayout();
-        gridLayout->setSpacing(0);
-
-        for(int i = 0; i < 6; i++) {
-            for(int j = 0; j < 6; j++) {
-                gridLayout->addWidget(squares[i][j], i, j);
-            }
-        }
-
-        mainLayout = new QVBoxLayout();
-        mainLayout->addWidget(instructionLabel);
-        mainLayout->addLayout(gridLayout);
-
-        setLayout(mainLayout);
-    }
+    void setCarSelected(const Car &pCarSelected);
 
     void renderLevel(const std::vector<std::vector<char>> &level,
-                     const std::vector<std::map<std::string, std::string>> &cars)
-    {
-        // clear selection
-        carSelected.clear();
+                     const std::map<char, Car> &cars);
 
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 6; j++)
-            {
-                squares[i][j]->setText(level[i][j]);
-                if (cars.find(level[i][j]) != cars.end())
-                {
-                    auto car = cars[level[i][j]];
-                    // style = f'background: {car["color"]}; border: 3px solid black;'
-                    std::string style = "";
-                    squares[i][j]->setStyleSheet(style);
-                }
-                else
-                {
-                    squares[i][j]->setStyleSheet("border: 3px solid black;")
-                }
-            }
-        }
-    }
+    void onSquareClicked(SquareWidget *square);
 
-    void onSquareClicked(SquareWidget *square)
-    {
-        parent()->onSquareClicked(square);
-    }
-
-    void selectCar(const std::map<std::string, std::string> &car)
-    {
-        if (carSelected.isEmpty())
-        {
-            // unselect previous car
-            for (auto square : carSelected["squares"])
-            {
-                squares[square.first][square.second]->updateAlpha(255);
-            }
-        }
-
-        // select new car
-        for (auto square : carSelected["squares"])
-        {
-            squares[square.first][square.second]->updateAlpha(50);
-        }
-
-        carSelected = car;
-    }
+    void selectCar(const Car &car);
 
     /**
      * @brief moves a car up, left, down or right one square
      * 
      * @param board [['.', '.', 'A', 'A', '.', '.'], ...]
      * @param key "Up", "Down", "Left" or "Right"
+     * 
+     * @return true if car was moved, false otherwise
      */
-    void moveSelectedCar(const std::vector<std::vector<char>> &board, std::string key)
-    {
-        std::vector<std::vector<char>> init_board = board;
-
-        auto controller = RushHour(board);
-        char carName = carSelected["name"];
-        int dir = (key == "Up") ? RushHour::UP : (key == "Down") ? RushHour::DOWN : (key == "Left") ? RushHour::LEFT : (key == "Right") ? RushHour::RIGHT;
-
-        controller.makeMove(carName, dir, 1);
-
-        return init_board != board;
-    }
+    bool moveSelectedCar(std::vector<std::vector<char>> &board, std::string key);
 };
+
+#endif

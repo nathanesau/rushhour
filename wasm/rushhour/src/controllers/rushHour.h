@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RUSHHOUR_H
+#define RUSHHOUR_H
 
 #include "../common.h"
 
@@ -12,9 +13,9 @@ struct RushHour
     static const int HORIZONTAL = 0;
     static const int VERTICAL = 1;
 
-    const std::vector<std::vector<char>> &board;
+    std::vector<std::vector<char>> &board;
 
-    RushHour(const std::vector<std::vector<char>> &board) : board(board)
+    RushHour(std::vector<std::vector<char>> &board) : board(board)
     {
     }
 
@@ -51,27 +52,27 @@ struct RushHour
 
         // check if dir conflicts with rotation
         if ((rotation == HORIZONTAL && (dir != LEFT && dir != RIGHT)) ||
-            (rotation == VERTICAL && (dir != UP && dir != DOWN))
+            (rotation == VERTICAL && (dir != UP && dir != DOWN)))
         {
             return false;
         }
 
         // check for edge of board and collisions
         for (int i = 1; i <= length; i++) {
-            auto edge = (dir == LEFT || dir == RIGHT) ? squares[0] : squares[squares.size() - 1];
-            auto new_edge = (dir == LEFT) ? std::make_pair(edge.first, edge.second - i) :
-                (dir == RIGHT) ? std::make_pair(edge.first, edge.second + i) :
-                (dir == UP) ? std::make_pair(edge.first - i, edge.second) :
-                (dir == DOWN) ? std::make_pair(edge.first + i, edge.second) :
-                std::make_pair(0, 0);
+            auto edge = (dir == LEFT || dir == UP) ? squares[0] : squares[squares.size() - 1];
+            std::vector<int> new_edge = (dir == LEFT) ? std::vector<int>{edge.first, edge.second - i} :
+                (dir == RIGHT) ? std::vector<int>{edge.first, edge.second + i} :
+                (dir == UP) ? std::vector<int>{edge.first - i, edge.second} :
+                (dir == DOWN) ? std::vector<int>{edge.first + i, edge.second} :
+                std::vector<int>{0, 0};
             
             // check if boundary check satisfied
-            if (new_edge.first < 0 || new_edge.first >= 6 || new_edge.second < 0 || new_edge.second >= 6) {
+            if (new_edge[0] < 0 || new_edge[0] >= 6 || new_edge[1] < 0 || new_edge[1] >= 6) {
                 return false;
             }
 
             // check for collision
-            if (board[new_edge.first][new_edge.second] != '.') {
+            if (board[new_edge[0]][new_edge[1]] != '.') {
                 return false;
             }
         }
@@ -79,12 +80,12 @@ struct RushHour
         // get the new squares after the move
         std::vector<std::pair<int, int>> new_squares;
         for (auto square : squares) {
-            auto new_square = (dir == LEFT) ? std::make_pair(square.first, square.second - i) :
-                (dir == RIGHT) ? std::make_pair(square.first, square.second + i) :
-                (dir == UP) ? std::make_pair(square.first - i, square.second) :
-                (dir == DOWN) ? std::make_pair(square.first + i, square.second) :
-                std::make_pair(0, 0);
-            new_squares.push_back(new_square);
+            std::vector<int> new_square = (dir == LEFT) ? std::vector<int>{square.first, square.second - length} :
+                (dir == RIGHT) ? std::vector<int>{square.first, square.second + length} :
+                (dir == UP) ? std::vector<int>{square.first - length, square.second} :
+                (dir == DOWN) ? std::vector<int>{square.first + length, square.second} :
+                std::vector<int>{0, 0};
+            new_squares.push_back({new_square[0], new_square[1]});
         }
 
         // perform the move
@@ -105,7 +106,7 @@ struct RushHour
      */
     bool isSolved()
     {
-        char carName = 'x';
+        char carName = 'X';
 
         std::vector<std::pair<int, int>> squares;
         for (int i = 0; i < 6; i++)
@@ -124,3 +125,5 @@ struct RushHour
         return edge.second == 5;
     }
 };
+
+#endif
