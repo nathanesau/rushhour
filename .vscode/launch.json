@@ -8,7 +8,7 @@
             "name": "Python: app.py",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/app.py",
+            "program": "${workspaceFolder}/pyqt/src/app.py",
             "console": "integratedTerminal"
         }
     ]
