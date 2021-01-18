@@ -11,3 +11,9 @@
 # required in order to use vcpkg with Visual Studio
 ./vcpkg.exe integrate install
 ```
+
+## wasm instructions
+
+good starting point here:
+
+https://github.com/msorvig/qt-webassembly-examples
