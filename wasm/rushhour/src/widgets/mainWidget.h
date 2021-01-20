@@ -9,8 +9,6 @@ class BoardWidget;
 class MainWindow;
 class SquareWidget;
 
-const std::string DEFAULT_LEVEL_TEXT = "..AA..\n.XX.B.\n....B.\n.DCCC.\n.D....\n.EE...\n";
-
 class MainWidget : public QWidget
 {
     LevelWidget *levelWidget;
@@ -30,6 +28,8 @@ public:
     void onSquareClicked(SquareWidget *square);
 
     void keyReleaseEvent(QKeyEvent *event);
+
+    void loadLevel(std::string levelText, std::string levelName);
 };
 
 #endif

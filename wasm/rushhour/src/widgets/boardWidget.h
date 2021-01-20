@@ -12,6 +12,8 @@ class BoardWidget : public QWidget
 {
     std::vector<std::vector<SquareWidget *>> squares;
     QGridLayout *gridLayout;
+    QLabel *instructionLabel;
+    QVBoxLayout *instructionLayout;
     QVBoxLayout *mainLayout;
     Car carSelected;
     MainWidget *mainWidget;

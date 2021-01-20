@@ -44,6 +44,7 @@ set(rushhour_SRCS
     src/car.cpp
     src/car.h
     src/common.h
+    src/levels.h
     src/main.cpp
 )
 

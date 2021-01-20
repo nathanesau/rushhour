@@ -2,6 +2,7 @@
 
 // widgets
 #include <QAbstractButton>
+#include <QAction>
 #include <QApplication>
 #include <QFont>
 #include <QGridLayout>
@@ -9,6 +10,8 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPushButton>

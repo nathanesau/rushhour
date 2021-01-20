@@ -5,6 +5,7 @@
 #include "mainWindow.h"
 #include "../controllers/rushHour.h"
 #include "../utility/string.h"
+#include "../levels.h"
 
 MainWidget::MainWidget(MainWindow *mainWindow, QWidget *parent) :
     mainWindow(mainWindow), QWidget(parent)
@@ -12,7 +13,7 @@ MainWidget::MainWidget(MainWindow *mainWindow, QWidget *parent) :
     // widgets
     levelWidget = new LevelWidget(this);
     std::vector<std::vector<char>> level;
-    auto lines = utility::split(DEFAULT_LEVEL_TEXT, "\n");
+    auto lines = utility::split(LEVEL_1_TEXT, "\n");
     for(auto line : lines) {
         std::vector<char> v(line.begin(), line.end());
         level.push_back(v);
@@ -162,4 +163,20 @@ void MainWidget::keyReleaseEvent(QKeyEvent *event)
         msgBox.setText("Congrats! You have solved the Rush Hour Puzzle!");
         msgBox.exec();
     }
+}
+
+void MainWidget::loadLevel(std::string levelText, std::string levelName)
+{
+    std::vector<std::vector<char>> level;
+    auto lines = utility::split(levelText, "\n");
+    for(auto line : lines) {
+        std::vector<char> v(line.begin(), line.end());
+        level.push_back(v);
+    }
+    levelWidget->setOriginalLevel(level);
+    levelWidget->parseLevel(level);
+    boardWidget->renderLevel(levelWidget->getLevel(), levelWidget->getCars());
+
+    std::string status = "Level " + levelName + " Loaded";
+    mainWindow->setStatus(status);   
 }

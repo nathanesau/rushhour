@@ -30,9 +30,13 @@ BoardWidget::BoardWidget(MainWidget *mainWidget, QWidget *parent) :
         }
     }
 
+    instructionLabel = new QLabel("click on a car and use the arrow keys to move the car");
+    instructionLayout = new QVBoxLayout();
+    instructionLayout->addWidget(instructionLabel);
+
     mainLayout = new QVBoxLayout();
-    //mainLayout->addWidget(instructionLabel);
-    mainLayout->addLayout(gridLayout);
+    mainLayout->addLayout(instructionLayout, 10);
+    mainLayout->addLayout(gridLayout, 90);
 
     setLayout(mainLayout);
 }

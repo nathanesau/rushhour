@@ -18,6 +18,7 @@ QT += widgets
 # Input
 HEADERS += src/car.h \
            src/common.h \
+           src/levels.h \
            src/controllers/rushHour.h \
            src/utility/string.h \
            src/widgets/boardWidget.h \
