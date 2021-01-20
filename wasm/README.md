@@ -1,31 +1,35 @@
 # wasm
 
-## Build Info
+## Build Instructions (Desktop)
 
 use one of these:
 
 * rushhour/CMakeLists.txt (cmake) 
 * rushhour/rushhour.pro (qmake)
 
-## Folder Info
+for example:
 
-folder structure:
+```bash
+# build
+cd rushhour
+qmake -project
+qmake
+make
 
-* rushhour: Qt Application (written in C++)
+# run
+./rushhour
+```
 
-## Emscripten Info
+## Build Instructions (WASM)
 
-emscripten instructions:
+use this docker image https://hub.docker.com/r/maukalinow/qtwasm_builder.
 
-```powershell
-git clone "https://github.com/emscripten-core/emsdk.git"
+```bash
+mkdir build
 
-# install
-.\emsdk.bat install latest
+# build the app
+docker run -v /home/esna0001/rushhour/wasm/build-wasm:/project/build -v /home/esna0001/rushhour/wasm/rushhour:/project/source maukalinow/qtwasm_builder:5.14_latest
 
-# activate
-.\emsdk activate latest
-
-# activate PATH and other variables in current terminal
-.\emsdk_env.bat
+# NOTE: QLabel clicks are not working properly
+python3 -m http.server
 ```
