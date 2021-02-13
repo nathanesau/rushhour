@@ -20,9 +20,20 @@ make
 ./rushhour
 ```
 
+## Build Instructions (Windows)
+
+use the ``docker.pkg.github.com/nathanesau/docker-qt/qt-win64s:1.0`` docker image.
+
+```bash
+# build the app (outputs to rushhour/release/rushhour.exe)
+docker run --rm -it -v "F:/rushhour/wasm/rushhour":/app docker.pkg.github.com/nathanesau/docker-qt/qt-win64s:1.0
+cd /app
+make -j $(nproc)
+```
+
 ## Build Instructions (WASM)
 
-use this docker image https://hub.docker.com/r/maukalinow/qtwasm_builder.
+use the ``maukalinow/qtwasm_builder:5.14_latest`` docker image.
 
 ```bash
 mkdir build
