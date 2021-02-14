@@ -7,7 +7,7 @@
         <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" /></a>
   <a href="https://github.com/nathanesau?tab=followers" alt="GitHub followers">
         <img src="https://img.shields.io/github/followers/nathanesau.svg?style=social&label=Follow" /></a>
-    <a href="https://GitHub.com/codereport/jsource/stargazers/" alt="GitHub stars">
+    <a href="https://GitHub.com/nathanesau/rushhour/stargazers/" alt="GitHub stars">
         <img src="https://img.shields.io/github/stars/nathanesau/rushhour.svg?style=social&label=Star" /></a>
 </p>
 
