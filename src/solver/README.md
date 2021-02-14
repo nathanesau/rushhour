@@ -152,3 +152,13 @@ Total: 110 seconds.
 [39] search_count: 24877
 [40] search_count: 24467
 ```
+
+## References
+
+Inspirations for solve algorithm:
+
+* Java Rush Hour Solve Algorithm: https://github.com/saschazar21/rushhour
+
+* A* Search Algorithm: https://en.wikipedia.org/wiki/A*_search_algorithm
+
+* Sudoku Solver: https://github.com/nathanesau/sudoku_solver
