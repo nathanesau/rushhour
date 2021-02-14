@@ -3,6 +3,8 @@
 <p align="center">
   <a href="https://github.com/nathanesau/rushhour" alt="build_app">
         <img src="https://github.com/nathanesau/rushhour/workflows/build_app/badge.svg" /></a>
+  <a href="https://github.com/nathanesau/rushhour" alt="test_app">
+        <img src="https://github.com/nathanesau/rushhour/workflows/test_app/badge.svg" /></a>
   <a href="https://github.com/nathanesau/rushhour/issues" alt="contributions welcome">
         <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" /></a>
   <a href="https://github.com/nathanesau?tab=followers" alt="GitHub followers">
@@ -26,5 +28,5 @@ A demo of the game is shown below.
 
 ## Folder Structure
 
-* [src/app](src/app/README.md): Contains the RushHour App.
-* [src/solver](src/solver/README.md): Contains the RushHour Solver.
+* [app](app/README.md): Contains the RushHour App.
+* [solver](solver/README.md): Contains the RushHour Solver.

@@ -26,6 +26,7 @@ HEADERS += car.h \
            widgets/mainWidget.h \
            widgets/mainWindow.h \
            widgets/squareWidget.h
+           widgets/widgets.h
 SOURCES += car.cpp \
            main.cpp \
            utility/string.cpp \

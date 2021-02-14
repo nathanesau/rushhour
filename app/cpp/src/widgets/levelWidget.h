@@ -1,6 +1,7 @@
 #ifndef LEVELWIDGET_H
 #define LEVELWIDGET_H
 
+#include "widgets.h"
 #include "../common.h"
 #include "../car.h"
 

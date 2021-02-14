@@ -1,6 +1,7 @@
 #ifndef BOARDWIDGET_H
 #define BOARDWIDGET_H
 
+#include "widgets.h"
 #include "../common.h"
 #include "../car.h"
 
