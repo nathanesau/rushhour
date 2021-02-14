@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "widgets.h"
 #include "../common.h"
 
 // forward declarations

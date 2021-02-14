@@ -1,8 +1,9 @@
 #ifndef SQUAREWIDGET_H
 #define SQUAREWIDGET_H
 
-
+#include "widgets.h"
 #include "../common.h"
+
 // forward declarations
 class BoardWidget;
 

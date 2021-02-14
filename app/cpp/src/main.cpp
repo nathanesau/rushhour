@@ -1,4 +1,5 @@
 #include "common.h"
+#include "widgets/widgets.h"
 #include "widgets/mainWindow.h"
 #include <QApplication>
 
