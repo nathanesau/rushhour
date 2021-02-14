@@ -1,0 +1,20 @@
+name: Build RushHour App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    container: nathanesau/github_actions:qt-win64s
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Building Windows x64 static
+      run: cd ${GITHUB_WORKSPACE}/app && qmake && make -j $(nproc)
