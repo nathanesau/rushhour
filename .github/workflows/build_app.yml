@@ -1,4 +1,4 @@
-name: Build RushHour App
+name: build_app
 
 on:
   push:
