@@ -14,9 +14,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     
-    # Docker image for building Windows x64 static
-    container: docker.pkg.github.com/nathanesau/docker-qt/qt-win64s:1.0
-    
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -25,6 +22,9 @@ jobs:
       # These commands will run inside the docker container
       - name: Build Windows x64 static
         run: |
+          docker login -u nathanesau -p b8a6929f67d3c3f84be9a77dc3d24b9123f935d6 docker.pkg.github.com
+          docker pull docker.pkg.github.com/nathanesau/docker-qt/qt-win64s:1.0
+          docker run --rm -it -v ${GITHUB_WORKSPACE}/src/app/cpp:/app docker.pkg.github.com/nathanesau/docker-qt/qt-win64s:1.0
           cp -r ${GITHUB_WORKSPACE}/src/app/cpp /app
           cd /app
           qmake
