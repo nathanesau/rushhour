@@ -17,4 +17,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Building Windows x64 static
-      run: ls && cd ${GITHUB_WORKSPACE}/src/app && qmake && make -j $(nproc)
+      run: ls && cd ${GITHUB_WORKSPACE}/src/app/cpp && qmake && make -j $(nproc)
