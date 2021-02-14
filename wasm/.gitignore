@@ -1,8 +1,0 @@
-emsdk
-build*
-
-# windows build
-Makefile*
-rushhour_plugin_import.cpp
-*.stash
-release

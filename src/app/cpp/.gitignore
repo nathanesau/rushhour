@@ -1,0 +1,8 @@
+# build files
+wasm-build
+debug
+release
+*.stash
+*import*
+Makefile*
+*.o
